@@ -127,6 +127,14 @@ public class PlayerScript : MonoBehaviour {
 		if(collision.gameObject.tag == "Bullet" || collision.gameObject.tag == "Rocket" || collision.gameObject.tag == "BorderOfScreen")
 		{	
 			levelManager.setIsPlayerDead(true);
+			
+			TextMesh[] arrayText = FindObjectsOfType<TextMesh>();
+			
+			foreach(TextMesh text in arrayText)
+			{
+				text.GetComponent<MeshRenderer>().enabled = true;
+			}
+			
 			Destroy(this.gameObject);
 		}
 	}

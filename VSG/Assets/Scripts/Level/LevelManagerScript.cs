@@ -31,29 +31,8 @@ public class LevelManagerScript : MonoBehaviour {
 		
 		indexHighestLevelBlock = 1;
 		
-		
-//		// Get the blocks of level in the scene
-//		LevelBlockScript[] levelBlocks = GameObject.FindObjectsOfType<LevelBlockScript>();
-//		
-//		foreach(LevelBlockScript levelBlocksInScene in levelBlocks)
-//		{
-//			listLevelBlock.Add(levelBlocksInScene);
-//			listLevelBlockSize.Add(new Vector3(levelBlocksInScene.transform.localScale.x, levelBlocksInScene.transform.localScale.y, levelBlocksInScene.transform.localScale.z));
-//		
-//			// Find the highest block of level amongst the found ones
-//			if(levelBlocksInScene.transform.localPosition.y > posHighestBlock)
-//			{
-//				posHighestBlock = levelBlocksInScene.transform.localPosition.y;
-//				indexHighestLevelBlock = counter;
-//			}
-//			
-//			++counter;
-//		}
-//		
-//		numberLevelBlock = listLevelBlock.Count;
-		
 		setPatternsInLevelBlock(0);
-	
+		setPatternsInLevelBlock(1);
 	}
 	
 	// Update is called once per frame
@@ -73,61 +52,53 @@ public class LevelManagerScript : MonoBehaviour {
 			typeOfPattern = Random.Range(0,2);
 			numOfPattern = Random.Range(1,5);
 			
-//			if(typeOfPattern == 0)
-//			{
-//				if(numOfPattern % 2 == 0 && ((i+1) % 2 == 1))
-//				{ 
-//					arrayPatternsLevelBlock[indexLevelBlock,i] = (GameObject)Instantiate(Resources.Load("Prefabs/LevelPattern/LevelPattern" + numOfPattern + "Prefab"));
-//					arrayPatternsLevelBlock[indexLevelBlock,i].transform.parent = listLevelBlock[indexLevelBlock].transform;
-//					
-//					Vector3 position = arrayPatternsLevelBlock[indexLevelBlock,i].transform.parent.transform.FindChild("Slot"+(i+2)).transform.localPosition - 
-//						arrayPatternsLevelBlock[indexLevelBlock,i].transform.parent.transform.FindChild("Slot"+(i+1)).transform.localPosition;
-//					
-//					position /=2;
-//					position += arrayPatternsLevelBlock[indexLevelBlock,i].transform.parent.transform.FindChild("Slot"+(i+1)).transform.localPosition;
-//					
-//					arrayPatternsLevelBlock[indexLevelBlock,i].transform.localPosition = new Vector3(position.x,
-//					                                                                                 arrayPatternsLevelBlock[indexLevelBlock,i].transform.parent.transform.FindChild("Slot"+(i+1)).transform.localPosition.y,
-//					                                                                                 arrayPatternsLevelBlock[indexLevelBlock,i].transform.parent.transform.FindChild("Slot"+(i+1)).transform.localPosition.z);
-//					++i;
-//				}
-//				else if(numOfPattern % 2 == 1)
-//				{
-//					arrayPatternsLevelBlock[indexLevelBlock,i] = (GameObject)Instantiate(Resources.Load("Prefabs/LevelPattern/LevelPattern" + numOfPattern + "Prefab"));
-//					arrayPatternsLevelBlock[indexLevelBlock,i].transform.parent = listLevelBlock[indexLevelBlock].transform;
-//					arrayPatternsLevelBlock[indexLevelBlock,i].transform.localPosition = arrayPatternsLevelBlock[indexLevelBlock,i].transform.parent.transform.FindChild("Slot"+(i+1)).transform.localPosition;
-//					
-//					if(numOfPattern == 1 && (i+1)%2 == 0)
-//					{
-//						LevelPattern1Script level1 = arrayPatternsLevelBlock[indexLevelBlock,i].transform.GetComponent<LevelPattern1Script>();
-//						float speed = level1.getWallMovingSpeed();
-//						level1.setWallMovingSpeed(speed * -1);
-//					}
-//					else if(numOfPattern == 3 && (i+1)%2 == 0)
-//					{
-//						LevelPattern3Script level3 = arrayPatternsLevelBlock[indexLevelBlock,i].transform.GetComponent<LevelPattern3Script>();
-//						level3.setWayToShoot(-1);
-//					}
-//				}
-//				else{
-//					--i;
-//				}
-//			}
-//			else
-//			{
+			if(typeOfPattern == 0)
+			{
+				if(numOfPattern % 2 == 0 && ((i+1) % 2 == 1))
+				{ 
+					arrayPatternsLevelBlock[indexLevelBlock,i] = (GameObject)Instantiate(Resources.Load("Prefabs/LevelPattern/LevelPattern" + numOfPattern + "Prefab"));
+					arrayPatternsLevelBlock[indexLevelBlock,i].transform.parent = arrayLevelBlock[indexLevelBlock].transform;
+					
+					Vector3 position = arrayPatternsLevelBlock[indexLevelBlock,i].transform.parent.transform.FindChild("Slot"+(i+2)).transform.localPosition - 
+						arrayPatternsLevelBlock[indexLevelBlock,i].transform.parent.transform.FindChild("Slot"+(i+1)).transform.localPosition;
+					
+					position /=2;
+					position += arrayPatternsLevelBlock[indexLevelBlock,i].transform.parent.transform.FindChild("Slot"+(i+1)).transform.localPosition;
+					
+					arrayPatternsLevelBlock[indexLevelBlock,i].transform.localPosition = new Vector3(position.x,
+					                                                                                 arrayPatternsLevelBlock[indexLevelBlock,i].transform.parent.transform.FindChild("Slot"+(i+1)).transform.localPosition.y,
+					                                                                                 arrayPatternsLevelBlock[indexLevelBlock,i].transform.parent.transform.FindChild("Slot"+(i+1)).transform.localPosition.z);
+					++i;
+				}
+				else if(numOfPattern % 2 == 1)
+				{
+					arrayPatternsLevelBlock[indexLevelBlock,i] = (GameObject)Instantiate(Resources.Load("Prefabs/LevelPattern/LevelPattern" + numOfPattern + "Prefab"));
+					arrayPatternsLevelBlock[indexLevelBlock,i].transform.parent = arrayLevelBlock[indexLevelBlock].transform;
+					arrayPatternsLevelBlock[indexLevelBlock,i].transform.localPosition = arrayPatternsLevelBlock[indexLevelBlock,i].transform.parent.transform.FindChild("Slot"+(i+1)).transform.localPosition;
+					
+					if(numOfPattern == 1 && (i+1)%2 == 0)
+					{
+						LevelPattern1Script level1 = arrayPatternsLevelBlock[indexLevelBlock,i].transform.GetComponent<LevelPattern1Script>();
+						float speed = level1.getWallMovingSpeed();
+						level1.setWallMovingSpeed(speed * -1);
+					}
+					else if(numOfPattern == 3 && (i+1)%2 == 0)
+					{
+						LevelPattern3Script level3 = arrayPatternsLevelBlock[indexLevelBlock,i].transform.GetComponent<LevelPattern3Script>();
+						level3.setWayToShoot(-1);
+					}
+				}
+				else{
+					--i;
+				}
+			}
+			else
+			{
 				arrayPatternsLevelBlock[indexLevelBlock,i] = (GameObject)Instantiate(Resources.Load("Prefabs/EnemyPattern/EnemyPattern" + numOfPattern + "Prefab"));
 			arrayPatternsLevelBlock[indexLevelBlock,i].transform.parent = arrayLevelBlock[indexLevelBlock].transform;
 			arrayPatternsLevelBlock[indexLevelBlock,i].transform.position = arrayLevelBlock[indexLevelBlock].transform.FindChild("Slot"+(i+1)).transform.position;
-			//	arrayPatternsLevelBlock[indexLevelBlock,i].transform.position = new Vector3(0.0f, 0.0f, 0.0f);
-			//arrayPatternsLevelBlock[indexLevelBlock,i].transform.parent = arrayLevelBlock[indexLevelBlock].transform.FindChild("Slot"+(i+1)).transform;
-			
-//			GameObject test = (GameObject)Instantiate(Resources.Load("Prefabs/EnemyPattern/EnemyPattern" + numOfPattern + "Prefab"));
-//			//test.transform.localPosition = new Vector3(0.0f,0.0f,0.0f);
-//			test.transform.parent = arrayLevelBlock[indexLevelBlock].transform;//.FindChild("Slot"+(i+1)).transform;
-//			test.transform.localPosition = arrayLevelBlock[indexLevelBlock].transform.FindChild("Slot"+(i+1)).transform.localPosition;
-			
-				//arrayPatternsLevelBlock[indexLevelBlock,i].transform.localPosition = arrayPatternsLevelBlock[indexLevelBlock,i].transform.parent.transform.FindChild("Slot"+(i+1)).transform.localPosition;
-//			}
+
+			}
 		}
 	}
 	
