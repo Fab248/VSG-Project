@@ -1,12 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/LevelPattern/LevelPattern3Script.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Ammo/RocketScript.cs">
     <Files>
-      <File FileName="Assets/Scripts/Level/LevelBlockScript.cs" Line="23" Column="2" />
-      <File FileName="Assets/Scripts/Level/LevelManagerScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/LevelPattern/LevelPattern1Script.cs" Line="67" Column="4" />
-      <File FileName="Assets/Scripts/LevelPattern/LevelPattern2Script.cs" Line="78" Column="147" />
-      <File FileName="Assets/Scripts/LevelPattern/LevelPattern3Script.cs" Line="19" Column="2" />
+      <File FileName="Assets/Scripts/Ammo/BulletScript.cs" Line="4" Column="70" />
+      <File FileName="Assets/Scripts/Ammo/RocketScript.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
