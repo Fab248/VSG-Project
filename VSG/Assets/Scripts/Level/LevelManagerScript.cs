@@ -19,7 +19,10 @@ public class LevelManagerScript : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-	
+		
+		float posHighestBlock = 0;
+		int counter = 0;
+		
 		// Get the blocks of level in the scene
 		LevelBlockScript[] levelBlocks = GameObject.FindObjectsOfType<LevelBlockScript>();
 		
@@ -27,10 +30,19 @@ public class LevelManagerScript : MonoBehaviour {
 		{
 			listLevelBlock.Add(levelBlocksInScene);
 			listLevelBlockSize.Add(new Vector3(levelBlocksInScene.transform.localScale.x, levelBlocksInScene.transform.localScale.y, levelBlocksInScene.transform.localScale.z));
+		
+			// Find the highest block of level amongst the found ones
+			if(levelBlocksInScene.transform.localPosition.y > posHighestBlock)
+			{
+				posHighestBlock = levelBlocksInScene.transform.localPosition.y;
+				indexHighestLevelBlock = counter;
+			}
+			
+			++counter;
 		}
 		
 		numberLevelBlock = listLevelBlock.Count;
-		indexHighestLevelBlock = numberLevelBlock - 1;
+		//indexHighestLevelBlock = numberLevelBlock - 1;
 	
 	}
 	
