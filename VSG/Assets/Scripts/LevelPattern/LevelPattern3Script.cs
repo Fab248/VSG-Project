@@ -58,4 +58,9 @@ public class LevelPattern3Script : MonoBehaviour {
 		Plane[] planes = GeometryUtility.CalculateFrustumPlanes(camera);
 		return GeometryUtility.TestPlanesAABB(planes, renderer.bounds);
 	}
+	
+	public void setWayToShoot(int direction)
+	{
+		bulletDirection = direction;
+	}
 }

@@ -49,12 +49,14 @@
      <Compile Include="Assets\Scripts\Ammo\BulletScript.cs" />
      <Compile Include="Assets\Scripts\Ammo\RocketScript.cs" />
      <Compile Include="Assets\Scripts\Enemy\EnemyScript.cs" />
+     <Compile Include="Assets\Scripts\EnemyPattern\EnemyPatternScript.cs" />
      <Compile Include="Assets\Scripts\Level\LevelBlockScript.cs" />
      <Compile Include="Assets\Scripts\Level\LevelManagerScript.cs" />
      <Compile Include="Assets\Scripts\LevelPattern\LevelPattern1Script.cs" />
      <Compile Include="Assets\Scripts\LevelPattern\LevelPattern2Script.cs" />
      <Compile Include="Assets\Scripts\LevelPattern\LevelPattern3Script.cs" />
      <Compile Include="Assets\Scripts\LevelPattern\LevelPattern4Script.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerScript.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

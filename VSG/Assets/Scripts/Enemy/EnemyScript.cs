@@ -16,6 +16,7 @@ public class EnemyScript : MonoBehaviour {
 	private Vector3 playersDirection;
 	private RaycastHit hit;
 	private float counterIntervalShoots = 0.0f;
+	private bool playerIsDead = false;
 	
 	public ammo KindOfAmmo;
 	public float intervalBetweenTwoShoots = 0.0f;
@@ -36,18 +37,22 @@ public class EnemyScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		// Define the direction of the player from enemy's point of view
-		playersDirection = player.transform.position - this.transform.position;
-		
-		// Launch a ray toward the player
-		if(Physics.Raycast(this.transform.position, playersDirection, out hit))
+		// If player is still alive, enemy still try to kill him
+		if(!playerIsDead)
 		{
-			// Test if the player has been seen and if the enemy can shoot
-			if(hit.transform.position == player.transform.position && counterIntervalShoots == 0.0f)
+			// Define the direction of the player from enemy's point of view
+			playersDirection = player.transform.position - this.transform.position;
+			
+			// Launch a ray toward the player
+			if(Physics.Raycast(this.transform.position, playersDirection, out hit))
 			{
-				shoot (this.transform.position, playersDirection, ammoSpeed);
-				// Start the interval with the second shoot
-				counterIntervalShoots = intervalBetweenTwoShoots;
+				// Test if the player has been seen and if the enemy can shoot
+				if(hit.transform.position == player.transform.position && counterIntervalShoots == 0.0f)
+				{
+					shoot (this.transform.position, playersDirection, ammoSpeed);
+					// Start the interval with the second shoot
+					counterIntervalShoots = intervalBetweenTwoShoots;
+				}
 			}
 		}
 		
@@ -67,12 +72,15 @@ public class EnemyScript : MonoBehaviour {
 		// Create the bullet
 		GameObject bullet = (GameObject)Instantiate(Resources.Load("Prefabs/Ammo/"+KindOfAmmo+"Prefab"));
 		
+		int directionToAim = ((player.transform.position.x - startPosition.x)>0)?1:-1;
+		
+		startPosition.x +=  directionToAim * (this.transform.localScale.x/2 + 0.2f);
+		startPosition.y -= 0.1f;
+		
 		if(KindOfAmmo == ammo.Bullet)
 		{
 			BulletScript bulletOptions = bullet.GetComponent<BulletScript>();
 			
-			startPosition.x += this.transform.localScale.x/2 + 0.2f;
-			startPosition.y -= 0.1f;
 			bulletOptions.setStartPos(startPosition);
 			bulletOptions.setSpeed(speed);
 			bulletOptions.setDirection(direction);
@@ -82,8 +90,6 @@ public class EnemyScript : MonoBehaviour {
 		{
 			RocketScript rocketOptions = bullet.GetComponent<RocketScript>();
 			
-			startPosition.x += this.transform.localScale.x/2 + 0.5f;
-			startPosition.y -= 0.1f;
 			rocketOptions.setStartPos(startPosition);
 			rocketOptions.setSpeed(speed);
 			rocketOptions.setDirection(direction);
@@ -91,5 +97,17 @@ public class EnemyScript : MonoBehaviour {
 			rocketOptions.setDistanceBeforeAutoDestruction(rocketDistanceBeforeAutoDestructionMin, rocketDistanceBeforeAutoDestructionMax);
 		}
 		
+	}
+	
+	// If the enemy gets hit by a bullet or a rocket he dies
+	void OnCollisionEnter (Collision collision)
+	{
+		if(collision.gameObject.tag == "Bullet" || collision.gameObject.tag == "Rocket")
+			Destroy(this.gameObject);
+	}
+	
+	public void setPlayerIsDead(bool isDead)
+	{
+		playerIsDead = isDead;
 	}
 }

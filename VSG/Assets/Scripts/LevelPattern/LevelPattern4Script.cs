@@ -41,7 +41,7 @@ public class LevelPattern4Script : MonoBehaviour {
 		endPos[1] = new Vector3(wall2.transform.localPosition.x - wall2.transform.localScale.x / 2.0f, arrayOfSlots[1].transform.localPosition.y, arrayOfSlots[1].transform.localPosition.z);
 		
 		// Set the position of the first bullet
-		bullets[0].transform.position = startPos[0];
+		bullets[0].transform.localPosition = startPos[0];
 		
 		// If bullets are synchronised, they will go in the same direction at the same time
 		if(synchronisedBullets)

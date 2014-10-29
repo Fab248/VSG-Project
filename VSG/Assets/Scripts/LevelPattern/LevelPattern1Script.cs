@@ -76,7 +76,32 @@ public class LevelPattern1Script : MonoBehaviour {
 				// Change the direction
 				wayToGo *= -1;
 			}
+		}	
+	}
+	
+	public void setWallMovingSpeed(float speed)
+	{
+		int directionCurrentSpeed = (wallMovingSpeed > 0)?1:-1;
+		int directionNewSpeed = (speed > 0)?1:-1;
+		
+		wallMovingSpeed = speed;
+		
+		// If the new speed is in the other direction of the current one, endPos and startPos have to be reset
+		if(directionCurrentSpeed != directionNewSpeed)
+		{
+			distance *= -1;
+			
+			endPos = startPos;
+			endPos.x += distance;
+			
+			wayToGo = ((endPos.x - startPos.x) > 0)?1:-1;
+			direction = (int)wayToGo;
 		}
 		
+	}
+	
+	public float getWallMovingSpeed()
+	{
+		return wallMovingSpeed;
 	}
 }

@@ -18,12 +18,12 @@ public class LevelBlockScript : MonoBehaviour {
 	
 	}
 	
-	// Tells if a block is visible frome a specific camera
+	// Tell if a block is visible frome a specific camera
 	// (Usefull to avoid getting a wrong value because of the editor camera)
-	public bool isVisibleFrom(Camera camera)
+	public bool isVisibleFrom(Renderer renderer, Camera camera)
 	{
 		Plane[] planes = GeometryUtility.CalculateFrustumPlanes(camera);
-		return GeometryUtility.TestPlanesAABB(planes, this.renderer.bounds);
+		return GeometryUtility.TestPlanesAABB(planes, renderer.bounds);
 	}
 	
 	public void moveBlock(float speed)

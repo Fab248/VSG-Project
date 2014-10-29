@@ -1,4 +1,10 @@
-﻿using UnityEngine;
+﻿/*
+Script name : RocketScript
+Author : Fabien Sacriste
+Summary : Move the Rocket from its position toward the direction set.
+			Explodes at the end.
+*/
+using UnityEngine;
 using System.Collections;
 
 public class RocketScript : MonoBehaviour {
@@ -21,6 +27,7 @@ public class RocketScript : MonoBehaviour {
 		if(!autoDestructionActivated)
 			this.transform.position = new Vector3(this.transform.position.x + ratio.x * Time.deltaTime, this.transform.position.y + ratio.y * Time.deltaTime, this.transform.position.z + ratio.z * Time.deltaTime);
 		
+		// Test if the destruction has been activated and if the particles are done
 		if(autoDestructionActivated && !this.GetComponent<ParticleSystem>().isPlaying)
 		{
 			destruction();
@@ -80,6 +87,7 @@ public class RocketScript : MonoBehaviour {
 		}
 	}
 	
+	// Destroy the rocket
 	private void destruction()
 	{
 		Destroy(this.gameObject);
