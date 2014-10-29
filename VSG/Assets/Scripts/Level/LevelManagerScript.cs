@@ -13,15 +13,11 @@ public class LevelManagerScript : MonoBehaviour {
 	private GameObject[] arrayLevelBlock = new GameObject[2];
 	private Vector3[] arrayLevelBlockSize = new Vector3[2];
 	private GameObject[,] arrayPatternsLevelBlock = new GameObject[2,6];
-	private int numberLevelBlock = 0;
 	private int indexHighestLevelBlock = 0;
 	private bool playerIsDead = false;
 	
 	// Use this for initialization
 	void Start () {
-		
-		float posHighestBlock = 0;
-		int counter = 0;
 		
 		arrayLevelBlock[0] = this.transform.FindChild("LevelBlockPrefab1").gameObject;
 		arrayLevelBlock[1] = this.transform.FindChild("LevelBlockPrefab2").gameObject;
@@ -175,7 +171,7 @@ public class LevelManagerScript : MonoBehaviour {
 					if(arrayPatternsLevelBlock[i,j].GetComponent<EnemyPatternScript>() != null)
 					{
 						// Tell the enemies the player is dead
-						arrayPatternsLevelBlock[i,j].GetComponent<EnemyPatternScript>().setPlayerIsDead(dead);
+						arrayPatternsLevelBlock[i,j].GetComponent<EnemyPatternScript>().setPlayerIsDead(playerIsDead);
 
 					}
 				}
